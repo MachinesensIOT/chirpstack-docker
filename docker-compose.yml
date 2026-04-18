@@ -12,12 +12,13 @@ services:
       - postgres
       - mosquitto
       - redis
+      - influxdb
     environment:
       - MQTT_BROKER_HOST=mosquitto
       - REDIS_HOST=redis
       - POSTGRESQL_HOST=postgres
     ports:
-      - 8080:8080
+      - 8081:8080
 
   chirpstack-gateway-bridge:
     image: chirpstack/chirpstack-gateway-bridge:4
@@ -56,6 +57,7 @@ services:
   postgres:
     image: postgres:14-alpine
     restart: unless-stopped
+    command: postgres -c shared_buffers=256MB -c work_mem=4MB -c max_connections=200 -c effective_cache_size=1GB
     volumes:
       - ./configuration/postgresql/initdb:/docker-entrypoint-initdb.d
       - postgresqldata:/var/lib/postgresql/data
@@ -65,7 +67,7 @@ services:
   redis:
     image: redis:7-alpine
     restart: unless-stopped
-    command: redis-server --save 300 1 --save 60 100 --appendonly no
+    command: redis-server --save 300 1 --save 60 100 --appendonly no --maxmemory 512mb --maxmemory-policy allkeys-lru
     volumes:
       - redisdata:/data
 
@@ -77,6 +79,37 @@ services:
     volumes: 
       - ./configuration/mosquitto/config/:/mosquitto/config/
 
+  influxdb:
+    image: influxdb:2.7
+    restart: unless-stopped
+    ports:
+      - 8086:8086
+    volumes:
+      - influxdbdata:/var/lib/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_ADMIN_USERNAME}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_ADMIN_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN}
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - grafanadata:/var/lib/grafana
+      - ./configuration/grafana/provisioning:/etc/grafana/provisioning:ro
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    depends_on:
+      - influxdb
+
 volumes:
   postgresqldata:
   redisdata:
+  influxdbdata:
+  grafanadata:

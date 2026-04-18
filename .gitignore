@@ -1,6 +1,10 @@
 # hidden files, exluding gitattributes
 .*
 !.gitattributes
+!.env.example
+
+# secrets — never commit real credentials
+.env
 
 # data folder
 /data
