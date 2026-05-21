@@ -40,7 +40,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"counter\")\n  |> sum()",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"counter\")\n  |> sum()",
           "refId": "A"
         }
       ]
@@ -75,7 +75,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"counter\")\n  |> keep(columns: [\"dev_eui\"])\n  |> distinct(column: \"dev_eui\")\n  |> count()",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"counter\")\n  |> keep(columns: [\"dev_eui\"])\n  |> distinct(column: \"dev_eui\")\n  |> count()",
           "refId": "A"
         }
       ]
@@ -113,7 +113,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"rssi\")\n  |> mean()",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"rssi\")\n  |> mean()",
           "refId": "A"
         }
       ]
@@ -151,7 +151,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"snr\")\n  |> mean()",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: -1h)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"snr\")\n  |> mean()",
           "refId": "A"
         }
       ]
@@ -195,7 +195,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"rssi\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> map(fn: (r) => ({ r with _field: r.dev_eui }))",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"rssi\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> map(fn: (r) => ({ r with _field: r.dev_eui }))",
           "refId": "A"
         }
       ]
@@ -239,7 +239,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"snr\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> map(fn: (r) => ({ r with _field: r.dev_eui }))",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"snr\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> map(fn: (r) => ({ r with _field: r.dev_eui }))",
           "refId": "A"
         }
       ]
@@ -283,7 +283,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"counter\")\n  |> aggregateWindow(every: v.windowPeriod, fn: sum, createEmpty: false)",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"counter\")\n  |> aggregateWindow(every: v.windowPeriod, fn: sum, createEmpty: false)",
           "refId": "A"
         }
       ]
@@ -327,7 +327,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"dr\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> map(fn: (r) => ({ r with _field: r.dev_eui }))",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"dr\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> map(fn: (r) => ({ r with _field: r.dev_eui }))",
           "refId": "A"
         }
       ]
@@ -358,7 +358,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "import \"join\"\n\nrssi = from(bucket: \"chirpstack\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"rssi\")\n  |> keep(columns: [\"_time\", \"_value\", \"dev_eui\", \"device_name\", \"application_name\", \"f_port\"])\n  |> rename(columns: {_value: \"rssi\"})\n\nsnr = from(bucket: \"chirpstack\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"snr\")\n  |> keep(columns: [\"_time\", \"_value\", \"dev_eui\"])\n  |> rename(columns: {_value: \"snr\"})\n\nfcnt = from(bucket: \"chirpstack\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"f_cnt\")\n  |> keep(columns: [\"_time\", \"_value\", \"dev_eui\"])\n  |> rename(columns: {_value: \"f_cnt\"})\n\nj1 = join.inner(left: rssi, right: snr, on: (l, r) => l._time == r._time and l.dev_eui == r.dev_eui, as: (l, r) => ({l with snr: r.snr}))\njoin.inner(left: j1, right: fcnt, on: (l, r) => l._time == r._time and l.dev_eui == r.dev_eui, as: (l, r) => ({l with f_cnt: r.f_cnt}))\n  |> sort(columns: [\"_time\"], desc: true)\n  |> limit(n: 100)",
+          "query": "import \"join\"\n\nrssi = from(bucket: \"MSiOT_Test_db\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"rssi\")\n  |> keep(columns: [\"_time\", \"_value\", \"dev_eui\", \"device_name\", \"application_name\", \"f_port\"])\n  |> rename(columns: {_value: \"rssi\"})\n\nsnr = from(bucket: \"MSiOT_Test_db\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"snr\")\n  |> keep(columns: [\"_time\", \"_value\", \"dev_eui\"])\n  |> rename(columns: {_value: \"snr\"})\n\nfcnt = from(bucket: \"MSiOT_Test_db\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"device_uplink\")\n  |> filter(fn: (r) => r._field == \"f_cnt\")\n  |> keep(columns: [\"_time\", \"_value\", \"dev_eui\"])\n  |> rename(columns: {_value: \"f_cnt\"})\n\nj1 = join.inner(left: rssi, right: snr, on: (l, r) => l._time == r._time and l.dev_eui == r.dev_eui, as: (l, r) => ({l with snr: r.snr}))\njoin.inner(left: j1, right: fcnt, on: (l, r) => l._time == r._time and l.dev_eui == r.dev_eui, as: (l, r) => ({l with f_cnt: r.f_cnt}))\n  |> sort(columns: [\"_time\"], desc: true)\n  |> limit(n: 100)",
           "refId": "A"
         }
       ]
@@ -386,7 +386,7 @@
       "targets": [
         {
           "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-          "query": "from(bucket: \"chirpstack\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement =~ /^device_frmpayload_data_/)\n  |> keep(columns: [\"_time\", \"_measurement\", \"_value\", \"_field\", \"dev_eui\", \"device_name\", \"application_name\", \"f_port\"])\n  |> sort(columns: [\"_time\"], desc: true)\n  |> limit(n: 200)",
+          "query": "from(bucket: \"MSiOT_Test_db\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement =~ /^device_frmpayload_data_/)\n  |> keep(columns: [\"_time\", \"_measurement\", \"_value\", \"_field\", \"dev_eui\", \"device_name\", \"application_name\", \"f_port\"])\n  |> sort(columns: [\"_time\"], desc: true)\n  |> limit(n: 200)",
           "refId": "A"
         }
       ]
@@ -410,13 +410,13 @@
       {
         "current": {},
         "datasource": { "type": "influxdb", "uid": "${DS_INFLUXDB}" },
-        "definition": "from(bucket: \"chirpstack\") |> range(start: -24h) |> filter(fn: (r) => r._measurement == \"device_uplink\") |> keep(columns: [\"device_name\"]) |> distinct(column: \"device_name\") |> sort()",
+        "definition": "from(bucket: \"MSiOT_Test_db\") |> range(start: -24h) |> filter(fn: (r) => r._measurement == \"device_uplink\") |> keep(columns: [\"device_name\"]) |> distinct(column: \"device_name\") |> sort()",
         "hide": 0,
         "includeAll": true,
         "multi": true,
         "name": "device_name",
         "options": [],
-        "query": "from(bucket: \"chirpstack\") |> range(start: -24h) |> filter(fn: (r) => r._measurement == \"device_uplink\") |> keep(columns: [\"device_name\"]) |> distinct(column: \"device_name\") |> sort()",
+        "query": "from(bucket: \"MSiOT_Test_db\") |> range(start: -24h) |> filter(fn: (r) => r._measurement == \"device_uplink\") |> keep(columns: [\"device_name\"]) |> distinct(column: \"device_name\") |> sort()",
         "refresh": 2,
         "type": "query",
         "label": "Device"
