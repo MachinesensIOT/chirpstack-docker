@@ -10,14 +10,7 @@ datasources:
       organization: MSiOT_Test
       defaultBucket: MSiOT_Test_db
       tlsSkipVerify: true
-<<<<<<< HEAD
     secureJsonData:
       token: G88GaTn630LBGq_2sozKXJ9Rtru845Pf3pZoQXoKcfUVNwE9ghHywsS5WO7s93phZAQg7HM_cXuXGDwC1uGR3Q==
-=======
-      # This token must match INFLUXDB_ADMIN_TOKEN in your .env file.
-      # Grafana reads this at startup from the provisioning file.
-      # Do NOT commit a real token here — use .env for the actual value.
-      token: ${INFLUXDB_ADMIN_TOKEN}
->>>>>>> 565bb41 (update configurations)
     isDefault: true
     editable: true

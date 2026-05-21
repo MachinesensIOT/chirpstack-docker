@@ -142,11 +142,6 @@
   # Setting this to 0 disables per-application event logging.
   per_application_event_log_max_history=0
 
-<<<<<<< HEAD
-[ui]
-  enabled = true
-  bind = "0.0.0.0:8080"
-=======
   #[[inputs.mqtt_consumer]]
   #servers = ["tcp://mosquitto:1883"]
   #topics = ["application/+/device/+/event/up"]
@@ -170,4 +165,3 @@
   enabled = true
   bind = "0.0.0.0:8080"
 
->>>>>>> 565bb41 (update configurations)
