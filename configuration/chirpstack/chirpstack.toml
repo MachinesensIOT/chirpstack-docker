@@ -101,7 +101,7 @@
   enabled=["mqtt"]
 
   [integration.mqtt]
-    server="tcp://$MQTT_BROKER_HOST:1883/"
+    server="tcp://mosquitto:1883/"
     json=true
 
     # QoS level for MQTT publish.
@@ -125,7 +125,6 @@
   # Per-device frame-log max history.
   #
   # Setting this to 0 disables per-device frame logging, which significantly
-  # reduces PostgreSQL write pressure at high device counts (5,000+ devices).
   per_device_frame_log_max_history=0
 
   # Per-application frame-log max history.
@@ -143,6 +142,32 @@
   # Setting this to 0 disables per-application event logging.
   per_application_event_log_max_history=0
 
+<<<<<<< HEAD
 [ui]
   enabled = true
   bind = "0.0.0.0:8080"
+=======
+  #[[inputs.mqtt_consumer]]
+  #servers = ["tcp://mosquitto:1883"]
+  #topics = ["application/+/device/+/event/up"]
+  #data_format = "json"
+
+  #[[outputs.influxdb]]
+  #urls = ["http://influxdb:8086"]
+  #database = "chirpstack"
+
+  #[metrics]
+  #  timezone="UTC"
+
+  #[metrics.influxdb]
+  #endpoint="http:/influxdb:8086"
+  #db="chirpstack"
+  #username="admin"
+  #password="chirpstack-influxdb"
+  #retention_policy_name=""
+
+[ui]
+  enabled = true
+  bind = "0.0.0.0:8080"
+
+>>>>>>> 565bb41 (update configurations)
