@@ -18,7 +18,7 @@
   #  * disable - Do not use TLS
   #  * prefer - Attempt to connect with TLS but allow sessions without
   #  * require - Require the use of TLS
-  dsn="postgres://chirpstack:chirpstack@$POSTGRESQL_HOST/chirpstack?sslmode=disable"
+  dsn="postgres://chirpstack:chirpstack@postgres/chirpstack?sslmode=disable"
 
   # Max open connections.
   #
@@ -40,7 +40,7 @@
   #
   # Set multiple addresses when connecting to a cluster.
   servers=[
-    "redis://$REDIS_HOST/",
+    "redis://redis/",
   ]
 
   # TLS enabled.
@@ -94,7 +94,7 @@
   # is never exposed. Changing this secret will invalidate all login and API
   # tokens. The following command can be used to generate a random secret:
   #   openssl rand -base64 32
-  secret="you-must-replace-this"
+  secret="G88GaTn630LBGq_2sozKXJ9Rtru845Pf3pZoQXoKcfUVNwE9ghHywsS5WO7s93phZAQg7HM_cXuXGDwC1uGR3Q=="
 
 
 [integration]
@@ -121,7 +121,7 @@
 
 # Monitoring configuration.
 [monitoring]
-
+  bind="0.0.0.0:8091"
   # Per-device frame-log max history.
   #
   # Setting this to 0 disables per-device frame logging, which significantly
@@ -143,3 +143,6 @@
   # Setting this to 0 disables per-application event logging.
   per_application_event_log_max_history=0
 
+[ui]
+  enabled = true
+  bind = "0.0.0.0:8080"
