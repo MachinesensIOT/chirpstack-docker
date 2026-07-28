@@ -1,6 +1,7 @@
 services:
   chirpstack:
     image: chirpstack/chirpstack:4
+      #    image: 289577550251.dkr.ecr.ap-south-1.amazonaws.com/prod-in-msiot-ecr:chirpstack-msiot-4
     command: -c /etc/chirpstack
     restart: unless-stopped
     volumes:

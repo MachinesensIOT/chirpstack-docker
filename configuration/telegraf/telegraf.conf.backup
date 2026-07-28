@@ -1,0 +1,88 @@
+# Telegraf configuration for ChirpStack - InfluxDB v2
+ 
+# Subscribes to ChirpStack uplink events on MQTT and writes to InfluxDB
+ 
+[agent]
+
+  interval = "10s"
+
+  round_interval = true
+
+  metric_batch_size = 1000
+
+  metric_buffer_limit = 10000
+
+  flush_interval = "10s"
+
+  flush_jitter = "0s"
+
+  omit_hostname = true
+ 
+# Output: InfluxDB v2
+
+[[outputs.influxdb_v2]]
+
+  urls = ["http://influxdb:8086"]
+
+  token = "${INFLUXDB_ADMIN_TOKEN}"
+
+  organization = "${INFLUXDB_ORG}"
+
+  bucket = "${INFLUXDB_BUCKET}"
+ 
+# Input: ChirpStack uplink events via MQTT
+
+[[inputs.mqtt_consumer]]
+
+  servers = ["tcp://mosquitto:1883"]
+ 
+  ## Subscribe to all uplink events across all applications and devices
+
+  topics = [
+
+    "application/+/device/+/event/up",
+
+    "application/+/device/+/command/down",
+
+    "application/+/device/+/event/join",
+
+    "application/+/device/+/event/status",
+
+  ]
+ 
+  topic_tag = "topic"
+
+  client_id = "telegraf-chirpstack-01"
+
+  persistent_session = false
+
+  qos = 0  
+
+  data_format = "json_v2"
+
+  [[inputs.mqtt_consumer.json_v2]]
+
+    measurement_name = "chirpstack"
+
+    # Store normal fields
+
+    [[inputs.mqtt_consumer.json_v2.field]]
+
+      path = "device"
+
+    [[inputs.mqtt_consumer.json_v2.field]]
+
+      path = "event.up"
+
+    [[inputs.mqtt_consumer.json_v2.field]]
+
+      path = "event.txack"
+
+    [[inputs.mqtt_consumer.json_v2.field]]
+
+      path = "event.ack"
+
+    [[inputs.mqtt_consumer.json_v2.field]]
+
+      path = "event.down"
+ 

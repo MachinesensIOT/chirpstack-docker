@@ -108,16 +108,16 @@
     # 0 = at most once (default, fire and forget)
     # 1 = at least once (acknowledged delivery — highest impact change)
     # 2 = exactly once (slowest, not recommended for high throughput)
-    qos=1
+    qos=0
 
     # Clean session.
     # Set to false to enable persistent MQTT session.
     # When false, the broker queues messages published while ChirpStack
     # is disconnected and delivers them on reconnect — prevents data loss.
-    clean_session=false
+    clean_session=true
 
     # Client ID for persistent session (required when clean_session=false).
-    client_id="chirpstack"
+    client_id=""
 
 # Monitoring configuration.
 [monitoring]
@@ -161,7 +161,9 @@
   #password="chirpstack-influxdb"
   #retention_policy_name=""
 
+[gateway]
+  rx_timestamp_max_drift="60s"
+
 [ui]
   enabled = true
   bind = "0.0.0.0:8080"
-
